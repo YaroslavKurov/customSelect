@@ -3,18 +3,202 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script><![endif]-->
-		<title>CustomSelect</title>
+		<title>Custom Select</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/sumoselect.css">
+		<link rel="stylesheet" type="text/css" href="css/jquery.jscrollpane.css">
+		<link rel="stylesheet" type="text/css" href="css/fonts.css">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div class="wrapper">
-			
-		</div>
+		<main>
+			<div class="wrapper">
+				<div class="container">
+					<div class="container__title">
+						<h1>Custom Select</h1>
+					</div>
+					<div class="example">
+						<div class="example__information">
+							<h2>Необходимые файлы для подключения</h2>
+							<p>CSS files:</p>
+							<div class="example__scroll">
+								<pre>&lt;!-- styles needed by jScrollPane --&gt;
+	&lt;link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet"/&gt;
+
+	&lt;!-- styles needed by SummoSelect --&gt;
+	&lt;link type="text/css" href="css/sumoselect.css" rel="stylesheet"/&gt;
+	</pre>
+</div>
+	<p>Js files:</p>
+<div class="example__scroll">
+	<pre>&lt;!-- latest jQuery direct from google's CDN --&gt;
+	&lt;script type="text/javascript" src="js/jquery.min.js"&gt;&lt;/script&gt;
+
+	&lt;!-- the mousewheel plugin - optional to provide mousewheel support --&gt;
+	&lt;script type="text/javascript" src="js/jquery.mousewheel.js"&gt;&lt;/script&gt;
+
+	&lt;!-- the jScrollPane script --&gt;
+	&lt;script type="text/javascript" src="js/jquery.jscrollpane.min.js"&gt;&lt;/script&gt;
+
+	&lt;!-- the SummoSelect script --&gt;
+	&lt;script type="text/javascript" src="js/jquery.sumoselect.js"&gt;&lt;/script&gt;
+	</pre>
+							</div>
+							<p>Для корректной работы плагина необходимо скачать и подключить соответствующие файлы. Скачать их можно по соответственным путям <b>скрпиты</b> в папке <b>/js</b>, <b>стили</b> в папке <b>/css</b></p>
+							<p>Так же можно скачать файлы с официальных сайтов:
+								<ul>
+									<li><a href="http://jscrollpane.kelvinluck.com/">scrollPane</a></li>
+									<li><a href="https://jquery.com">jQuery</a></li>
+									<li><a href="https://github.com/jquery/jquery-mousewheel">Mousewheel</a></li>
+								</ul>
+							</p>
+							<h2>Иницилизация</h2>
+							<p>Создаем наш селектор:</p>
+							<pre>&lt;select class="js-select styled-select"&gt;
+	&lt;option disabled="disabled" selected>Sort by&lt;/option>
+	&lt;option>Decrease in price&lt;/option>
+	&lt;option>Ascending price&lt;/option>
+	&lt;option>First new items&lt;/option>
+	&lt;option>Promotional products first&lt;/option>
+	&lt;option>Promotional products first&lt;/option>
+	&lt;option>Promotional products first&lt;/option>
+	&lt;option>Promotional products first&lt;/option>
+&lt;/select&gt;
+						</pre>
+							<p><b>сlass="styled-select"</b> отвечает за стилизацию<br><b>сlass="js-select"</b> отвечает за навешивание плагина</p>
+							<p>Далее необходимо написать <b>js</b> код для иницилизации плагина.</p>
+							<div class="example__scroll">
+							<pre>
+if ($('.js-select').length > 0) {
+	$('.js-select').each( function(i, item) {
+		var $this = $(this),
+			attr = $this.attr('multiple'),
+			settings = {
+				placeholder: $this.data('title'),
+				csvDispCount: 20,
+				floatWidth: 0,
+				nativeOnDevice: [
+						'Android',
+						'BlackBerry',
+						'iPhone',
+						'iPad',
+						'iPod',
+						'Opera Mini',
+						'IEMobile',
+						'Silk'
+				],
+			};
+
+		if ($this.attr('multiple')) {
+			settings.selectAll = true;
+			settings.selectAlltext = $this.data('select');
+		}
+
+		$this.SumoSelect(settings);
+	});
+	$('.SumoSelect').each(function(){
+		var $select = $(this),
+			$wrapper = $select.find('.optWrapper'),
+			$caption = $select.find('.CaptionCont');
+
+		$caption.on('click', function(e) {
+			if ($wrapper.find('.options li').length > 4) {
+				$wrapper.jScrollPane({
+					contentWidth: '0px',
+					verticalDragMinHeight : 12,
+					verticalDragMaxHeight: 12,
+					mouseWheelSpeed: 50,
+					animateScroll: true,
+					animateDuration: 100
+				});
+			} 
+		});
+	});
+}
+							</pre>
+						</div>
+						<p>Стилизуем наш скрытый select</p>
+						<pre>
+.styled-select {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 100%;
+	width: 100%;
+	border: none;
+	z-index: 1;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0;
+}
+						</pre>
+						<h2>Реализованные примеры</h2>
+						<p><b>Стилизованный селект</b></p>
+						<div class="example__select">
+							<span class="example__title">Title for select</span>
+							<select class="js-select styled-select">
+								<option disabled="disabled" selected>Sort by</option>
+								<option>Decrease in price</option>
+								<option>Ascending price</option>
+								<option>First new items</option>
+							</select>
+						</div>
+						<div class="example__select">
+							<span class="example__title">Title for select</span>
+							<select class="js-select styled-select">
+								<option disabled="disabled" selected>Сортировать по</option>
+								<option>Убыванию цены</option>
+								<option>Возрастанию цены</option>
+								<option>Сначала новинки</option>
+								<option>Сначала акционные товары</option>
+							</select>
+						</div>
+						<p><b>Стилизованный селекты со стилизованным скролом</b></p>
+						<div class="example__select">
+							<span class="example__title">Title for select</span>
+							<select class="js-select styled-select">
+								<option disabled="disabled" selected>Sort by</option>
+								<option>Decrease in price</option>
+								<option>Ascending price</option>
+								<option>First new items</option>
+								<option>Promotional products first</option>
+								<option>Promotional products first</option>
+								<option>Promotional products first</option>
+								<option>Promotional products first</option>
+							</select>
+						</div>
+						<div class="example__select">
+							<span class="example__title">Title for select</span>
+							<select class="js-select styled-select">
+								<option disabled="disabled" selected>Сортировать по</option>
+								<option>Убыванию цены</option>
+								<option>Возрастанию цены</option>
+								<option>Сначала новинки</option>
+								<option>Сначала акционные товары</option>
+								<option>Сначала акционные товары</option>
+								<option>Сначала акционные товары</option>
+								<option>Сначала акционные товары</option>
+								<option>Сначала акционные товары</option>
+							</select>
+						</div>
+						<h2>Стилизация</h2>
+						<p>Дальше необходимо отстилизовать ваш кастомный селектор.<br> Стили для кастомизации вы пишетв в главных стилях, а не в стилях плагинов.</p>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script src="js/modernizr.min.js" ></script>
 		<script src="js/jquery.min.js" ></script>
 		<script src="js/jquery.sumoselect.js" ></script>
+		<script src="js/jquery.mousewheel-3.0.6.pack.js" ></script>
 		<script src="js/jquery.jscrollpane.min.js" ></script>
 		<script src="js/script.js" ></script>
 	</body>
