@@ -46,97 +46,22 @@
 &lt;!-- the SummoSelect script --&gt;
 &lt;script type="text/javascript" src="js/jquery.sumoselect.js"&gt;&lt;/script&gt;</pre>
 							</div>
-							<p>Для корректной работы плагина необходимо скачать и подключить соответствующие файлы. Скачать их можно по соответственным путям <b>скрпиты</b> в папке <b>/js</b>, <b>стили</b> в папке <b>/css</b></p>
-							<p>Так же можно скачать файлы с официальных сайтов:
-								<ul>
-									<li><a href="http://jscrollpane.kelvinluck.com/">scrollPane</a></li>
-									<li><a href="https://jquery.com">jQuery</a></li>
-									<li><a href="https://github.com/jquery/jquery-mousewheel">Mousewheel</a></li>
-								</ul>
-							</p>
-							<h2>Иницилизация</h2>
-							<p>Создаем наш селектор:</p>
-							<pre>&lt;select class="js-select styled-select"&gt;
-	&lt;option disabled="disabled" selected>Sort by&lt;/option>
-	&lt;option>Decrease in price&lt;/option>
-	&lt;option>Ascending price&lt;/option>
-	&lt;option>First new items&lt;/option>
-	&lt;option>Promotional products first&lt;/option>
-	&lt;option>Promotional products first&lt;/option>
-	&lt;option>Promotional products first&lt;/option>
-	&lt;option>Promotional products first&lt;/option>
-&lt;/select&gt;</pre>
-							<p><b>сlass="styled-select"</b> отвечает за стилизацию<br><b>сlass="js-select"</b> отвечает за навешивание плагина</p>
-							<p>Далее необходимо написать <b>js</b> код для иницилизации плагина.</p>
-							<div class="example__scroll">
-							<pre>
-if ($('.js-select').length > 0) {
-	$('.js-select').each( function(i, item) {
-		var $this = $(this),
-			attr = $this.attr('multiple'),
-			settings = {
-				placeholder: $this.data('title'),
-				csvDispCount: 20,
-				floatWidth: 0,
-				nativeOnDevice: [
-						'Android',
-						'BlackBerry',
-						'iPhone',
-						'iPad',
-						'iPod',
-						'Opera Mini',
-						'IEMobile',
-						'Silk'
-				],
-			};
-
-		if ($this.attr('multiple')) {
-			settings.selectAll = true;
-			settings.selectAlltext = $this.data('select');
-		}
-
-		$this.SumoSelect(settings);
-	});
-	$('.SumoSelect').each(function(){
-		var $select = $(this),
-			$wrapper = $select.find('.optWrapper'),
-			$caption = $select.find('.CaptionCont');
-
-		$caption.on('click', function(e) {
-			if ($wrapper.find('.options li').length > 4) {
-				$wrapper.jScrollPane({
-					contentWidth: '0px',
-					verticalDragMinHeight : 12,
-					verticalDragMaxHeight: 12,
-					mouseWheelSpeed: 50,
-					animateScroll: true,
-					animateDuration: 100
-				});
-			} 
-		});
-	});
-}</pre>
-						</div>
+						<p>Для корректной работы плагина необходимо скачать и подключить соответствующие файлы. Скачать их можно по соответственным путям <b>скрпиты</b> в папке <b>/js</b>, <b>стили</b> в папке <b>/css</b></p>
+						<p>Так же можно скачать файлы с официальных сайтов:
+							<ul>
+								<li><a href="http://jscrollpane.kelvinluck.com/">scrollPane</a></li>
+								<li><a href="https://jquery.com">jQuery</a></li>
+								<li><a href="https://github.com/jquery/jquery-mousewheel">Mousewheel</a></li>
+							</ul>
+						</p>
+						<h2>Иницилизация</h2>
+						<p>Создаем наш селектор:</p>
+						<script async src="https://jsfiddle.net/f3rr45jv/1/embed/html/dark/"></script>
+						<p><b>сlass="styled-select"</b> отвечает за стилизацию<br><b>сlass="js-select"</b> отвечает за навешивание плагина</p>
+						<p>Далее необходимо написать <b>js</b> код для иницилизации плагина.</p>
+						<script async src="https://jsfiddle.net/xsLo3uzb/embed/js/dark/"></script>
 						<p>Стилизуем наш скрытый select</p>
-						<pre>
-.styled-select {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: 100%;
-	width: 100%;
-	border: none;
-	z-index: 1;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	filter: alpha(opacity=0);
-	-moz-opacity: 0;
-	-khtml-opacity: 0;
-	opacity: 0;
-}</pre>
+						<script async src="https://jsfiddle.net/L8j4Lq2p/embed/css/dark/"></script>
 						<h2>Реализованные примеры</h2>
 						<p><b>Стилизованный селект</b></p>
 						<div class="example__select">
