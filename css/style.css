@@ -3,7 +3,7 @@
 	font-family: 'Roboto', sans-serif;
 }
 body {
-	background: #FDE9DF;
+	background: #f2f2f2;
 }
 h1 {
 	text-align: center;
@@ -21,7 +21,13 @@ p {
 	line-height: 21px;
 }
 a {
-	color: #0881A3;
+	color: #0091ea;
+	border-bottom: 1px solid #0091ea;
+	transition: 0.24s all;
+	text-decoration: none;
+}
+a:hover {
+	border-color: #fff;
 }
 .wrapper {
 	max-width: 870px;
@@ -31,7 +37,7 @@ a {
 .container__title {
 	padding-top: 15px;
 	padding-bottom: 15px;
-	background-color: #0881A3;
+	background-color: #292929;
 	margin-bottom: 20px;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
